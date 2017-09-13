@@ -4,8 +4,21 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { createStore } from 'redux';
+// import { diff } from 'deep-diff';
+
+import R from 'ramda';
+// import Perf from 'react-native/Libraries/Performance/RCTRenderingPerf';
+// import Perf from 'ReactPerf';
 
 class Page extends Component {
+  /*
+  componentDidUpdate() {
+    Perf.stop();
+    const measurements = Perf.getLastMeasurements();
+    Perf.printInclusive(measurements);
+  }
+  */
+
   render() {
     return (
       <View style={styles.container}>
@@ -37,9 +50,13 @@ class Title extends Component {
 }
 
 class Button extends Component {
+  onPress = () => {
+    this.props.onPress();
+    // Perf.start();
+  };
   render() {
     return (
-      <TouchableOpacity onPress={this.props.onPress} activeOpacity={0.7}>
+      <TouchableOpacity onPress={this.onPress} activeOpacity={0.7}>
         <Text style={styles.button}>
           {this.props.text}
         </Text>
@@ -59,6 +76,16 @@ class Counter extends Component {
 }
 
 class Entities extends Component {
+  /*
+  componentWillReceiveProps(nextProps) {
+    console.log(diff(nextProps, this.props));
+    console.log(nextProps.values == this.props.values);
+  }
+  shouldComponentUpdate(nextProps) {
+    return !R.equals(nextProps, this.props);
+  }
+  */
+
   render() {
     return (
       <View>
